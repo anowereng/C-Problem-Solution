@@ -1,0 +1,20 @@
+ public ActionResult GetItems()
+        {
+            List<Item> aList = aItemManager.ShowItem();
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            foreach (var c in aList)
+            {
+                SelectListItem i = new SelectListItem();
+                i.Text = c.Name.ToString();
+                i.Value = c.Id.ToString();
+                selectList.Add(i);
+            }
+            ViewBag.data = selectList;
+            return View();
+        }
+        
+        ---------------.cshtml--------------------
+         <tr>
+             <td>@Html.LabelFor(m=>m.code,new {@class="form-control"})</td>
+             <td>@Html.DropDownList("Item",new SelectList (ViewBag.data,"Value","Text")) </td>   
+         </tr>  
